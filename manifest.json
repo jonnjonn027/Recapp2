@@ -9,10 +9,16 @@
     "default_popup": "popup2.html",
     "default_title": "Name:"
   },
- 
+  
+  // "background": {
+  //   "scripts": ["popup2.js", "jquery-2.1.4.js", "sidr/jquery.sidr.min.js"],
+  //   "persistent": false
+  //},
   "permissions": [
     "activeTab",
-    "https://ajax.googleapis.com/"
+    "https://ajax.googleapis.com/",
+    "http://*/*",
+    "https://*/*"
   ]
 
 }

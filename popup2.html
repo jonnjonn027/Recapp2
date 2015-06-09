@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <script src="underscore-min.js"></script>
+        <script src="jquery-2.1.4.js"></script>
+        <script src="sidr/jquery.sidr.min.js"></script>
         <script src="popup2.js"></script>
+<!--         <link rel="stylesheet" href="sidr/stylesheets/jquery.sidr.dark.css"> -->
         <style>
             body { 
                 min-width: 20px; 
@@ -17,7 +21,9 @@
             }
         </style>
     </head>
-    <body>
+    <body> 
+        <div id="email"></div>
+        <div id="sidr">
             <p><label for="First Name">First Name</label><br />
             <input type="text" id="firstName" name="First Name" size="50" value="" /></p>
             <p><label for="Middle Name">Middle Name</label><br />
@@ -26,10 +32,12 @@
             <input type="text" id="lastName" name="Last Name" size="50" value="" /></p>
             <p><label for="Domain">Domain</label><br />
             <input type="Domain" id="domain" name="Domain" size="50" value="" /></p>
+            <p><label for="Github UserName">Github UserName</label><br />
+            <input type="Domain" id="userName" name="Github userName" size="50" value="" /></p>
             <p>
                 <span id="status-display"></span>
             </p>
-            <button id='submitbutton'>Submit!</button>
-            window.onclick 
+            <button id='submitbutton'>Submit!</button> 
+        </div>
     </body>
 </html>

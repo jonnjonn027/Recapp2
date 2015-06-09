@@ -1,14 +1,16 @@
+
 window.addEventListener('load',function() {
 	document.getElementById('submitbutton').addEventListener('click', function() {
 		var firstName = document.getElementById('firstName').value
 		var middleName = document.getElementById('middleName').value
 		var lastName = document.getElementById('lastName').value
 		var domain = document.getElementById('domain').value 
-		var permutations = getPermutations(firstName, middleName, lastName, domain);
+		var userName = document.getElementById('userName').value
+		var permutations = getPermutations(firstName, middleName, lastName, domain, userName);
 	});
 });
-
-function getPermutations(firstName, middleName, lastName, domain) {
+//function getEmailsFromGithub()
+function getPermutations(firstName, middleName, lastName, domain, userName) {
 	/* Returns all of the desired permutations for the given data */
 
 	// Extract the needed variables
@@ -66,5 +68,39 @@ function getPermutations(firstName, middleName, lastName, domain) {
 		// In the real version we'll do something different with this 
 		console.log(permutation)
 	}
+	//window.open("http://www.google.com/search?q="+firstName + "+" + lastName + "+github")
+	//chrome.tabs.create({url: "http://www.google.com/search?q="+firstName + "+" + lastName + "+github", selected: false});
+	//***need to find a way to make this work with only hitting enter
+	//****need to adjust so no gituhub window opens on submit if only looking for an email from userName
 	
+	if (userName) {
+		var emails = [];
+		console.log("logging the url");
+
+		console.log('https://api.github.com/users/'+userName+'/events/public')
+		r = jQuery.getJSON('https://api.github.com/users/'+userName+'/events/public', function(data) {
+			console.log(data)
+			for (var ev in data) {            
+				console.log('unpack an event')          
+				console.log(ev)
+			    var payload = data[ev]['payload'];                   
+			    commits = payload['commits'];
+			    for (var commit_i in commits) {
+			        var email = commits[commit_i]['author']['email'];
+			       	console.log(email);  
+			       	emails.push(email);           
+				} 
+			}
+
+			console.log($('#email'));
+			console.log(emails);
+			console.log(_.uniq(emails));
+			if (emails) {
+				$('#email').html(_.uniq(emails));
+			}
+			else {
+				$('#email').html('Could not find any emails on github');
+			}
+		});
+	}	
 }
